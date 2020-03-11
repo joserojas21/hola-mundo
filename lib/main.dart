@@ -1,8 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:wallet/database.dart';
 
 void main() => runApp(MyApp());
+
+var apikey = Database();
+
+//Future<List<dynamic>> monedas;
+Future<List<String>> monedas = apikey.getCurrency();
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -216,7 +222,9 @@ class _HomePageState extends State<HomePage> {
 
                     Expanded(
                       child: RaisedButton.icon(
-                          onPressed: (){},
+                          onPressed: (){
+                            apikey.getCurrency();
+                          },
                           icon: Icon(FontAwesomeIcons.levelDownAlt,
                           color: Color(0xFF2ecc71),),
                           label: Text("Receive"),
