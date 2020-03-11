@@ -1,10 +1,7 @@
-import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:wallet/coin_model.dart';
 import 'package:wallet/database.dart';
-import 'dart:async';
-import 'package:http/http.dart' as http;
 
 void main() => runApp(MyApp());
 
@@ -30,11 +27,9 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
-
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,6 +98,7 @@ class _HomePageState extends State<HomePage> {
         color: Color(0xFFbdc3c7),
         width: MediaQuery.of(context).size.width,
         child: SingleChildScrollView(
+
 
 
           child: Column(
@@ -212,9 +208,7 @@ class _HomePageState extends State<HomePage> {
 
                     Expanded(
                       child: RaisedButton.icon(
-                          onPressed: (){
-                            apikey.getCurrency();
-                          },
+                          onPressed: (){},
                           icon: Icon(FontAwesomeIcons.levelUpAlt,
                           color: Color(0xFF3498db),),
                           label: Text("Send"),
@@ -251,28 +245,6 @@ class _HomePageState extends State<HomePage> {
               ),
 
               Container(
-                child: FutureBuilder <List<Coin>> (
-                  future: getCoins(),
-                  builder: (BuildContext context, dynamic snapshot){
-
-                    if(snapshot.hasData){
-                      print(snapshot.data);
-                      return Container(
-                          child: Center(
-                              child: Text('tengo datos')
-                          )
-                      );
-                    }
-                    return Container(
-                      child: Center(
-                        child: Text('No hay datos'),
-                      ),
-                    );
-                  }
-                ),
-              ),
-
-              Container(
                 margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10,),
                 alignment: Alignment.topLeft,
                 child: Container(
@@ -292,8 +264,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-              ),
 
+              ),
               Container(
                   margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10,),
                   alignment: Alignment.topLeft,
@@ -371,27 +343,7 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
-  Future<List<Coin>> getCoins() async{
-    List<Coin> _jsonListMap;
-
-    String api = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=00280d57-72e8-4d65-b9dd-d5a4410dec58";
-
-    final response = await http.get(api);
-
-    if(response.statusCode == 200) {
-      final List jsonList = json.decode(response.body);
-      _jsonListMap = jsonList.map((dynamic i) => Coin.fromJson(i)).toList();
-      return _jsonListMap;
-
-    }
-  }
 }
-
-
-
-
-
 
 
 
