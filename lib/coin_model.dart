@@ -45,4 +45,3 @@ Future<List<Coin>> getCoins() async{
     return _jsonListMap;
   }
 }
-
