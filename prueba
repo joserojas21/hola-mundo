@@ -1,0 +1,95 @@
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              accountEmail:RaisedButton.icon(
+                  onPressed: (){
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context)=>
+                            TextEditEmail(_textt),
+                        )).then((result){
+                          if(result != null) {
+                            setState(() {
+                              _textt = result;
+                            });
+                          }
+                    });
+                  },
+                  icon: Icon(FontAwesomeIcons.edit),
+                  label: Text(_textt,
+                  style: TextStyle(fontSize: 10.0),),
+              ),
+
+              accountName: RaisedButton.icon(
+                  onPressed: (){
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context)=>
+                            TextEditName(_texts),
+                        )).then((result){
+                      if(result != null) {
+                        setState(() {
+                          _texts = result;
+                        });
+                      }
+                    });
+                  },
+                  icon: Icon(FontAwesomeIcons.edit),
+                  label: Text(_texts,
+                  style: TextStyle(fontSize: 10.0),)
+              ),
+
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: AssetImage('images/maplestory.jpg'),
+              ),
+              otherAccountsPictures: <Widget>[
+                CircleAvatar(
+                  backgroundImage: AssetImage('images/maplestory.jpg'),
+                )
+              ],
+            ),
+
+            ListTile(
+              title: Text("Home"),
+              leading: Icon(FontAwesomeIcons.home),
+              selected: true,
+              onTap: ()=> Navigator.of(context).pop(),
+            ),
+            ListTile(
+              title: Text("Portofolio"),
+              leading: Icon(FontAwesomeIcons.wallet),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                PortoFolio()));
+              },
+            ),
+            ListTile(
+              title: Text("News"),
+              leading: Icon(FontAwesomeIcons.newspaper),
+              onTap: (){
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        NewsScreen()));
+              },
+            ),
+            ListTile(
+              title: Text("Help"),
+              leading: Icon(FontAwesomeIcons.questionCircle),
+              onTap: (){
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        HelpApp()));
+              },
+            ),
+            Divider(),
+            ListTile(
+              title: Text("Close"),
+              leading: Icon(FontAwesomeIcons.timesCircle),
+              onTap: ()=> Navigator.of(context).pop(),
+            )
+          ],
+        ),
+      ),
